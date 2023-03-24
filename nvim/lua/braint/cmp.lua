@@ -179,7 +179,7 @@ cmp.setup {
     select = false,
   },
   window = {
-    documentation = false,
+    documentation = true,
     completion = {
       border = "rounded",
       winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",

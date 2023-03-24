@@ -11,10 +11,11 @@ end
 local servers = {
   "jdtls",
   "jsonls",
-  "sumneko_lua",
+  "lua_ls",
   "pyright",
   "clangd",
   "tsserver",
+  "gopls",
   "tailwindcss",
 }
 
@@ -58,12 +59,12 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
   end
 
-  if server == "sumneko_lua" then
+  if server == "lua_ls" then
     local l_status_ok, lua_dev = pcall(require, "neodev")
     if not l_status_ok then
       return
     end
-    lspconfig.sumneko_lua.setup({
+    lspconfig.lua_ls.setup({
       settings = {
         Lua = {
           completion = {

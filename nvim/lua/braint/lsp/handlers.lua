@@ -58,6 +58,14 @@ local function attach_navic(client, bufnr)
   navic.attach(client, bufnr)
 end
 
+local function ts_organize_import()
+  local param = {
+    command = '_typescript.organizeImports',
+    arguments = { vim.api.nvim_buf_get_name(0)}
+  }
+  vim.lsp.buf.execute_command(param)
+end
+
 local function lsp_keymaps(bufnr)
     local opts = { noremap = true, silent = true }
     local keymap = vim.api.nvim_buf_set_keymap
@@ -65,6 +73,7 @@ local function lsp_keymaps(bufnr)
     keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
     keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
     keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+    -- keymap(bufnr, "n", "gt", "<cmd>Lspsaga goto_type_definition<CR>", opts)
     keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
@@ -91,6 +100,7 @@ M.on_attach = function(client, bufnr)
     if JAVA_DAP_ACTIVE then
       require("jdtls").setup_dap { hotcodereplace = "auto" }
       require("jdtls.dap").setup_dap_main_class_configs()
+      attach_navic(client, bufnr)
     end
   end
 end

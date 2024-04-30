@@ -1,0 +1,6 @@
+require('whoseyourdd.plugin')
+require('whoseyourdd.option')
+require('whoseyourdd.keymap')
+require('whoseyourdd.colorscheme')
+require('whoseyourdd.terminal')
+require('whoseyourdd.icons')

@@ -2,14 +2,13 @@
 1. Install from pacman
 zsh git curl  wget unzip zip tar gzip rust xclip xsel wl-clipboard ripgrep fd neovim
 
-
 2. Install OMZ
 
 - git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 - git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 - git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
--  git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
--  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+- git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+- git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 
 3. Install Go + NVM + SDKMan
@@ -20,7 +19,6 @@ java
 8  : 8.0.372.fx-zulu
 11 : 11.0.20-tem
 17 : 17.0.8-tem
-
 
 4. Install docker
 
@@ -45,3 +43,66 @@ hostname=whoseyourdd
 systemd=true
 
 
+
+
+# GOLANG
+
+go install github.com/abice/go-enum@latest
+go install github.com/cweill/gotests/...@latest
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install github.com/abenz1267/gomvp@latest
+go install gotest.tools/gotestsum@latest
+go install github.com/segmentio/golines@latest
+go install github.com/koron/iferr@latest
+go install github.com/fatih/gomodifytags@latest
+go install github.com/kyoh86/richgo@latest
+go install golang.org/x/tools/cmd/guru@latest
+go install golang.org/x/tools/cmd/callgraph@latest
+go install github.com/tmc/json-to-struct@latest
+go install github.com/davidrjenni/reftools/cmd/fillswitch@latest
+go install github.com/onsi/ginkgo/v2/ginkgo@latest
+go install golang.org/x/tools/cmd/gonew@latest
+go install golang.org/x/tools/cmd/gorename@latest
+4. Install docker
+
+sudo usermod -aG docker $USER
+
+https://docs.docker.com/compose/install/linux/#install-the-plugin-manually
+
+DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+mkdir -p $DOCKER_CONFIG/cli-plugins
+curl -SL https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
+
+sudo nvim /etc/wsl.conf
+
+[user]
+default=braint
+
+[network]
+hostname=whoseyourdd
+
+[boot]
+systemd=true
+
+# GOLANG
+
+go install github.com/abice/go-enum@latest
+go install github.com/cweill/gotests/...@latest
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install github.com/abenz1267/gomvp@latest
+go install gotest.tools/gotestsum@latest
+go install github.com/segmentio/golines@latest
+go install github.com/koron/iferr@latest
+go install github.com/fatih/gomodifytags@latest
+go install github.com/kyoh86/richgo@latest
+go install golang.org/x/tools/cmd/guru@latest
+go install golang.org/x/tools/cmd/callgraph@latest
+go install github.com/tmc/json-to-struct@latest
+go install github.com/davidrjenni/reftools/cmd/fillswitch@latest
+go install github.com/onsi/ginkgo/v2/ginkgo@latest
+go install golang.org/x/tools/cmd/gonew@latest
+go install golang.org/x/tools/cmd/gorename@latest
+go install golang.org/x/tools/cmd/gorename@latest
+go install golang.org/x/vuln/cmd/govulncheck@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest

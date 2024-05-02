@@ -1,0 +1,77 @@
+services:
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka-container
+    depends_on:
+      - zookeeper
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - shared_network
+
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeper-container
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      - shared_network
+
+  artemis:
+    image: apache/activemq-artemis:latest
+    container_name: artemis-container
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    environment:
+      ANONYMOUS_LOGIN: true
+      ARTEMIS_USER: admin
+      ARTEMIS_PASS: admin
+    volumes:
+      - .docker/artemis-data:/data
+    networks:
+      - shared_network
+
+  activemq:
+    image: symptoma/activemq:latest
+    container_name: activemq-container
+    ports:
+      - "61617:61616"
+      - "8162:8161"
+    environment:
+      ACTIVEMQ_DISALLOW_WEBCONSOLE: false
+      ACTIVEMQ_WEBADMIN_USERNAME: admin
+      ACTIVEMQ_WEBADMIN_PASSWORD: admin
+      ACTIVEMQ_ADMIN_LOGIN: admin
+      ACTIVEMQ_ADMIN_PASSWORD: admin
+    volumes:
+      - .docker/activemq-data:/data
+    networks:
+      - shared_network
+
+  rabbitmq:
+    image: rabbitmq:3.10-management-alpine
+    container_name: rabbitmq-container
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "user"
+      RABBITMQ_DEFAULT_PASS: "user"
+    networks:
+      - shared_network
+
+networks:
+  shared_network:
+    external: true

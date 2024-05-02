@@ -1,0 +1,48 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: apps_config
+    ports:
+      - "3306:3306"
+    volumes:
+      - .docker/mysql-data:/var/lib/mysql
+      - .docker/database:/docker-entrypoint-initdb.d
+    networks:
+      - shared_network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-container
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: user
+    volumes:
+      - .docker/mongodb-data:/data
+    networks:
+      - shared_network
+
+  postgres:
+    image: postgres:14.1-alpine
+    container_name: postgres-container
+    hostname: postgres
+    environment:
+      - POSTGRES_DB=kafka
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - .docker/postgres:/var/lib/postgresql/data
+    networks:
+      - shared_network
+networks:
+  shared_network:
+    external: true
+
